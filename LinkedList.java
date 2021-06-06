@@ -3,11 +3,11 @@ package com.linkedlist;
 public class LinkedList {
 	public Node head = null;
 	public Node tail = null;
-
+	
 	class Node {
 		int data;
 		Node next;
-
+		
 		public Node(int data) {
 			this.data = data;
 			this.next = null;
@@ -30,24 +30,20 @@ public class LinkedList {
 		}
 	}
 
-
-	public void addNode(int data) {
-		Node newNode= new Node (data);		
-
-		if(this.tail == null) {
-			this.tail = newNode;
-		}
-		if(this.head == null) {
+	public void appened (int data) {
+		Node newNode= new Node (data);
+		if (this.head == null ||this.tail == null ) {
 			this.head = newNode;
-
-		} else {
-			Node tempNode = this.head;
-			this.head =newNode;
-			this.head.setNext(tempNode);
+			this.tail =newNode;
 		}
-
+		else {
+			this.tail.setNext(newNode);
+			this.tail = newNode;
+			
+		}
 	}
-
+	
+	
 	public void display() {
 		Node tempNode = head;
 		Node current = head;
@@ -61,15 +57,16 @@ public class LinkedList {
 			current = current.next;
 		}
 		System.out.println();
-	}
-
+		}
+	
 	public static void main(String[] args) {
-		LinkedListUC2 list = new LinkedListUC2();
 
-		list.addNode(70);
-		list.addNode(30);
-		list.addNode(56);
-
+		LinkedList list = new LinkedList();
+		
+		list.appened(56);
+		list.appened(30);
+		list.appened(70);
+	
 		list.display();
 	}
 }
