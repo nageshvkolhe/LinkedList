@@ -12,23 +12,6 @@ public class LinkedList {
 			this.data = data;
 			this.next = null;
 		}
-
-		public int getData() {
-			return data;
-		}
-
-		public void setData(int data) {
-			this.data = data;
-		}
-
-		public Node getNext() {
-			return next;
-		}
-
-		public void setNext(Node next) {
-			this.next = next;
-		}
-
 	}
 
 	public void addNode(int data) {
@@ -40,24 +23,21 @@ public class LinkedList {
 		}
 		else {
 			tail.next = newNode;
-
+			tail = newNode;
 		}
 	}
-
-	public Node getMiddleNode() {
-		if(head == null) {
-			return null;
+	
+	public void afterInsert(Node previousnode, int data) {
+		if (head == null) {
+			System.out.println("The given node previous can't null");
+		return;
 		}
-		Node slowPtr = head;
-		Node fastPtr = head;
-
-		while(fastPtr != null && fastPtr.next != null) {
-			slowPtr = slowPtr.next;
-			fastPtr = fastPtr.next.next;
-		}
-		return slowPtr;
+		Node newNode= new Node (data);
+		newNode.next = previousnode.next;
+		previousnode.next = newNode;
+		
 	}
-
+	
 	public void display() {
 		Node tempNode = head;
 		Node current = head;
@@ -78,12 +58,11 @@ public class LinkedList {
 		LinkedList list = new LinkedList();
 
 		list.addNode(56);
-		list.addNode(70);
 		list.addNode(30);
+		list.addNode(70);
 
+		list.afterInsert(list.head.next,40);
+		
 		list.display();
-				
-		Node middleNode = list.getMiddleNode();
-		System.out.println("middlenode is " +  middleNode.data);
 	}
 }
