@@ -1,6 +1,6 @@
 package com.linkedlist;
 
-public class LinkedListUC5 {
+public class LinkedList {
 	public static Node head = null;
 	public Node tail = null;
 
@@ -29,14 +29,17 @@ public class LinkedListUC5 {
 		}
 	}
 
-	public Node DeletFirstNode() {
-		if (head == null)
-			return head;
-		Node temp = head ;
-		head = head.next;
-		return head;
+	public Node DeleteLastNode() {
+		if (head == null || head.next == null) {
+		return null;
 	}
-
+		Node secondlast = head;
+		while (secondlast.next.next != null) 
+			secondlast = secondlast.next;
+			secondlast.next = null;
+			return head;
+		}
+	
 	public void display() {
 		Node tempNode = head;
 		Node current = head;
@@ -54,7 +57,7 @@ public class LinkedListUC5 {
 
 	public static void main(String[] args) {
 		
-		LinkedListUC5 list = new LinkedListUC5();
+		LinkedList list = new LinkedList();
 
 		list.addNode(56);
 		list.addNode(30);
@@ -62,9 +65,10 @@ public class LinkedListUC5 {
       
 		list.display();
 
-		list.DeletFirstNode();
+		list.DeleteLastNode();
 	
 		System.out.println("After Deletion of the element");
 		list.display();
 	}
 }
+
