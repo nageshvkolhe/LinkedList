@@ -1,19 +1,35 @@
 package com.linkedlist;
 
 public class LinkedList {
-	public static Node head = null;
+	public Node head = null;
 	public Node tail = null;
 
 	class Node {
 		int data;
 		Node next;
 
-		public Node(int data) {
+		 Node(int data) {
 			this.data = data;
 			this.next = null;
 		}
-	}
 
+		public int getData() {
+			return data;
+		}
+
+		public void setData(int data) {
+			this.data = data;
+		}
+
+		public Node getNext() {
+			return next;
+		}
+
+		public void setNext(Node next) {
+			this.next = next;
+		}
+
+	}
 
 	public void addNode(int data) {
 		Node newNode= new Node (data);
@@ -24,22 +40,24 @@ public class LinkedList {
 		}
 		else {
 			tail.next = newNode;
-			tail = newNode;
 
 		}
 	}
 
-	public Node DeleteLastNode() {
-		if (head == null || head.next == null) {
-		return null;
-	}
-		Node secondlast = head;
-		while (secondlast.next.next != null) 
-			secondlast = secondlast.next;
-			secondlast.next = null;
-			return head;
+	public Node getMiddleNode() {
+		if(head == null) {
+			return null;
 		}
-	
+		Node slowPtr = head;
+		Node fastPtr = head;
+
+		while(fastPtr != null && fastPtr.next != null) {
+			slowPtr = slowPtr.next;
+			fastPtr = fastPtr.next.next;
+		}
+		return slowPtr;
+	}
+
 	public void display() {
 		Node tempNode = head;
 		Node current = head;
@@ -60,15 +78,12 @@ public class LinkedList {
 		LinkedList list = new LinkedList();
 
 		list.addNode(56);
-		list.addNode(30);
 		list.addNode(70);
-      
-		list.display();
+		list.addNode(30);
 
-		list.DeleteLastNode();
-	
-		System.out.println("After Deletion of the element");
 		list.display();
+				
+		Node middleNode = list.getMiddleNode();
+		System.out.println("middlenode is " +  middleNode.data);
 	}
 }
-
