@@ -38,6 +38,23 @@ public class LinkedList {
 		
 	}
 	
+	void afterDelete(int key)
+	{
+		Node temp = head;
+		Node prev = null;
+
+		while (temp != null && temp.data != key)
+		{
+			prev = temp;
+			temp = temp.next;
+		}
+
+		if (temp == null)
+			return;
+		prev.next = temp.next;
+		temp = prev.next;
+	}	
+
 	public void display() {
 		Node tempNode = head;
 		Node current = head;
@@ -63,6 +80,7 @@ public class LinkedList {
 
 		list.afterInsert(list.head.next,40);
 		
+		list.afterDelete(40);
 		list.display();
 	}
 }
