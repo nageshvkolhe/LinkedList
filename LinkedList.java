@@ -1,86 +1,90 @@
 package com.linkedlist;
 
 public class LinkedList {
-	public Node head = null;
+	public static Node new_node;
+	public static Node head = null;
 	public Node tail = null;
 
 	class Node {
 		int data;
 		Node next;
 
-		 Node(int data) {
+		Node(int data) {
 			this.data = data;
 			this.next = null;
 		}
+
+		public int getData() {
+			return data;
+		}
+
+		public void setData(int data) {
+			this.data = data;
+		}
+
+		public Node getNext() {
+			return next;
+		}
+
+		public void setNext(Node next) {
+			this.next = next;
+		}
 	}
 
-	public void addNode(int data) {
-		Node newNode= new Node (data);
+	 void sortedInsert(Node new_node)
+	    {
+	        Node current;
 
-		if(head == null) {
-			head = newNode;
-			tail = newNode;
-		}
-		else {
-			tail.next = newNode;
-			tail = newNode;
-		}
-	}
+	        if (head == null || head.data >= new_node.data) {
+	            new_node.next = head;
+	            head = new_node;
+	        }
+	        else {
+		        current = head; 
+	            while (current.next != null && current.next.data < new_node.data)
+	                current = current.next;
+	 
+	            new_node.next = current.next;
+	            current.next = new_node;
+	        }
+	    }
+
+	    Node newNode(int data)
+	    {
+	        Node x = new Node(data);
+	        return x;
+	    }
 	
-	public void afterInsert(Node previousnode, int data) {
-		if (head == null) {
-			System.out.println("The given node previous can't null");
-		return;
+	 public void display() {
+			Node tempNode = head;
+			Node current = head;
+			if(head == null) {
+				System.out.println("List is Empty");
+				return;
+			}
+			while(current != null) {
+				System.out.print(current.data + " ");
+				current = current.next;
+			}
+			System.out.println();
 		}
-		Node newNode= new Node (data);
-		newNode.next = previousnode.next;
-		previousnode.next = newNode;
+	 
+	 public static void main(String[] args) {
 		
-	}
-	
-	void afterDelete(int key)
-	{
-		Node temp = head;
-		Node prev = null;
-
-		while (temp != null && temp.data != key)
-		{
-			prev = temp;
-			temp = temp.next;
-		}
-
-		if (temp == null)
-			return;
-		prev.next = temp.next;
-		temp = prev.next;
-	}	
-
-	public void display() {
-		Node tempNode = head;
-		Node current = head;
-		if(head == null) {
-			System.out.println("List is Empty");
-			return;
-		}
-		System.out.println("Singly LinkedList of Node");
-		while(current != null) {
-			System.out.print(current.data + " ");
-			current = current.next;
-		}
-		System.out.println();
-	}
-
-	public static void main(String[] args) {
-		
-		LinkedList list = new LinkedList();
-
-		list.addNode(56);
-		list.addNode(30);
-		list.addNode(70);
-
-		list.afterInsert(list.head.next,40);
-		
-		list.afterDelete(40);
-		list.display();
-	}
+			LinkedList list = new LinkedList();
+			
+				
+				
+		        new_node = list.newNode(56);
+		        list.sortedInsert(new_node);
+		        new_node = list.newNode(30);
+		        list.sortedInsert(new_node);
+		        new_node = list.newNode(40);
+		        list.sortedInsert(new_node);
+		        new_node = list.newNode(70);
+		        list.sortedInsert(new_node);
+		        
+		        System.out.println("Sorted Linked List");
+		        list.display();
+	 }	
 }
